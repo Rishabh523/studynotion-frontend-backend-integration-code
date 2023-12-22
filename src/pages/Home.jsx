@@ -7,6 +7,7 @@ import Banner from "../assets/Images/banner.mp4"
 import CodeBlocks from "../components/core/HomePage/CodeBlocks";
 import TimelineSection from "../components/core/HomePage/TimelineSection";
 import LearningLanguageSection from "../components/core/HomePage/LearningLanguageSection";
+import InstructorSection from "../components/core/HomePage/InstructorSection";
 
 function Home() {
     return (
@@ -85,12 +86,14 @@ function Home() {
 
                         codeblock={`<!DOCTYPE html>
                     <html>
-                    <head><title>Example</title><linkrel="stylesheet"href="styles.css">
+                    <head>
+                    <title>Example</title><linkrel="stylesheet"href="styles.css">
                     </head>
                     <body>
                     <h1><a href="/">Header</a>
                     </h1>
-                    <nav><ahref="one/">One</a><ahref="two/">Two</a><ahref="three/">Three</a>
+                    <nav>
+                    <ahref="one/">One</a><ahref="two/">Two</a><ahref="three/">Three</a>
                     </nav>`}
                         codeColor={"text-yellow-25"}
                     />
@@ -138,6 +141,7 @@ function Home() {
                     />
 
                 </div>
+                <ExploreMore />
             </div>
 
             {/* Section2 */}
@@ -173,7 +177,7 @@ function Home() {
                         </div>
 
 
-                        <div className="flex flex-col gap-10 w-[40%] iyems-start">
+                        <div className="flex flex-col gap-10 w-[40%] items-start">
                             <div className="text-[16px]">
                                 The modern StudyNotion is the dictates its own terms. Today, to be a competitive
                                 specialist requires more than professional skills.
@@ -194,8 +198,16 @@ function Home() {
                 </div>
             </div>
 
-            
+
             {/* Section3 */}
+            <div className="w-11/12 mx-auto max-w-maxContent flex-col items-center justify-between gap-8
+            first-letter bg-richblack-900 text-white">
+                   
+                   <InstructorSection />
+
+                   <h2 className="text-center text-4xl font-semibold mt-10">Review from others</h2>
+                   {/* Review Slider here */}
+            </div>
 
             {/* footer */}
 
