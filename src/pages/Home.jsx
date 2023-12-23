@@ -8,6 +8,8 @@ import CodeBlocks from "../components/core/HomePage/CodeBlocks";
 import TimelineSection from "../components/core/HomePage/TimelineSection";
 import LearningLanguageSection from "../components/core/HomePage/LearningLanguageSection";
 import InstructorSection from "../components/core/HomePage/InstructorSection";
+import Footer from "../components/common/Footer";
+import ExploreMore from "../components/core/HomePage/ExploreMore";
 
 function Home() {
     return (
@@ -205,11 +207,12 @@ function Home() {
                    
                    <InstructorSection />
 
-                   <h2 className="text-center text-4xl font-semibold mt-10">Review from others</h2>
+                   <h2 className="text-center text-4xl font-semibold mt-10">Review from other learners</h2>
                    {/* Review Slider here */}
             </div>
 
             {/* footer */}
+            <Footer />
 
         </div>
     )
