@@ -86,8 +86,8 @@ function Home() {
                             }
                         }
 
-                        codeblock={`<!DOCTYPE html>
-                    <html>
+                        codeblock={`<!DOCTYPE html>\n
+                    <html>\n
                     <head>
                     <title>Example</title><linkrel="stylesheet"href="styles.css">
                     </head>
@@ -132,12 +132,12 @@ function Home() {
 
                         codeblock={`<!DOCTYPE html>
                     <html>
-                    <head><title>Example</title><linkrel="stylesheet"href="styles.css">
+                    <head>\n<title>Example</title><linkrel="stylesheet"href="styles.css">
                     </head>
                     <body>
                     <h1><a href="/">Header</a>
                     </h1>
-                    <nav><ahref="one/">One</a><ahref="two/">Two</a><ahref="three/">Three</a>
+                    <nav>\n<ahref="one/">One</a><ahref="two/">Two</a><ahref="three/">Three</a>
                     </nav>`}
                         codeColor={"text-yellow-25"}
                     />
@@ -149,7 +149,7 @@ function Home() {
             {/* Section2 */}
             <div className="bg-pure-greys-5 text-richblack-700">
                 <div className="homepage_bg h-[310px]">
-                    <div className="w-11/12 max-w-maxContent flex items-center justify-center gap-5 mx-auto">
+                    <div className="w-11/12 max-w-maxContent flex items-center justify-between gap-5 mx-auto">
                         <div className="h-[150px]"></div>
                         <div className="flex flex-row gap-7 text-white">
                             <CTAButton active={true} linkto={"/signup"}>
