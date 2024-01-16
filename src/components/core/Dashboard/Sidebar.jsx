@@ -18,14 +18,15 @@ const Sidebar = () => {
 
     if(profileLoading || authLoading) {
         return(
-            <div className="mt-10">
-                Loading...
-            </div>
+            <div className="grid h-[calc(100vh-3.5rem)] min-w-[220px] items-center border-r-[1px] border-r-richblack-700 bg-richblack-800">
+        <div className="spinner"></div>
+      </div>
         )
     }
 
     return(
-        <div>
+        <>
+        
           <div className="flex min-w-[222px] flex-col border-r-[1px] border-r-richblack-700
         h-[calc(100vh-3.5rem)] bg-richblack-800 py-10"> 
          
@@ -50,7 +51,7 @@ const Sidebar = () => {
             <button 
                   onClick={ () =>setConfirmationModal( {
                     text1: "Are You Sure ?",
-                    text2: "Youe will be logged out of your Account",
+                    text2: "You will be logged out of your Account",
                     btn1Text: "Logout",
                     btn2Text:"Cancel",
                     btn1Handler: () => dispatch(logout(navigate)),
@@ -60,9 +61,7 @@ const Sidebar = () => {
                   >
                     <div className="flex items-center gap-x-2">
                         <VscSignOut  className="text-lg" />
-                        <span>
-                            Logout
-                        </span>
+                        <span>Logout</span>
                     </div>
 
                   </button>
@@ -71,7 +70,8 @@ const Sidebar = () => {
          </div>
          </div>
          {confirmationModal && <ConfirmationModal modalData={confirmationModal} />}
-        </div>
+    
+        </>
     )
 }
 export default Sidebar

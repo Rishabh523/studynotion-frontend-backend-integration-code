@@ -170,7 +170,7 @@ function Home() {
                 </div>
 
                 <div className="mx-auto w-11/12 max-w-maxContent flex flex-col items-center justify-between gap-7">
-                    <div className="flex flex-row gap-5 mb-10 mt-[95px]">
+                    <div className="flex flex-row gap-5 mb-10 mt-[95px] justify-between">
                         <div className="text-4xl font-semibold w-[45%]">
 
                             Get the Skills you need for a

@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes,Route } from "react-router-dom";
+import { Routes,Route, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
 import OpenRoute from "./components/core/Auth/OpenRoute"; 
 import Login from "./pages/Login";
@@ -11,7 +11,22 @@ import VerifyEmail from "./pages/VerifyEmail";
 import About from "./pages/About";
 //import ProfileDropDown from "./components/core/Auth/ProfileDropDown";
 
+import MyProfile from "./components/core/Dashboard/MyProfile";
+import Contact from "./pages/Contact";
+import Dashboard from "./pages/Dashboard";
+import PrivateRoute from "./components/core/Auth/PrivateRoute";
+import Error from "./pages/Error";
+import Settings from "./components/core/Dashboard/Settings";
+import EnrolledCourses from "./components/core/Dashboard/EnrolledCourses";
+import Cart from "./components/core/Dashboard/Cart";
+import { ACCOUNT_TYPE } from "./utils/constant";
+import AddCourse from "./components/core/Dashboard/AddCourse";
+import { useDispatch, useSelector } from "react-redux";
+
 function App() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const {user} = useSelector((state) => state.profile)
   return (
     <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter">
       <Navbar />
@@ -43,7 +58,7 @@ function App() {
               </OpenRoute>
             }
             /> 
-             <Route 
+        <Route 
             path="verify-email"
             element = {
               <OpenRoute>
@@ -52,7 +67,7 @@ function App() {
             }
             /> 
 
-            <Route  
+        <Route  
             path="update-password/:id"
             element = {
               <OpenRoute>
@@ -63,17 +78,69 @@ function App() {
 
        
 
-            <Route 
-            path="about"
-            element = {
+        <Route 
+            path="/about"
+              element = {
               <OpenRoute>
                 <About />
               </OpenRoute>
             }
             />  
-             <Route path="/contact" element={<Contact />} />
+        <Route 
+            path="/contact" 
+            element={<Contact />} 
+          />
 
-             <Route path="dashbord/my-profile" element={<MyProfile />} />  
+        <Route
+             element= {
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+             }
+            >
+              <Route 
+            path="/dashboard/my-profile" 
+            element={<MyProfile />} 
+            />
+             <Route 
+            path="/dashboard/settings" 
+            element={<Settings />} 
+            />
+           
+            {
+              user?.accountType === ACCOUNT_TYPE.STUDENT && (
+                 <>
+                   <Route 
+            path="/dashboard/cart" 
+            element={<Cart />} 
+            />
+            <Route 
+            path="/dashboard/enrolled-courses" 
+            element={<EnrolledCourses />} />
+                 </>
+              )
+            }
+             {
+              user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
+                 <>
+                   <Route 
+            path="/dashboard/add-course" 
+            element={<AddCourse />} 
+            />
+            
+            
+                 </>
+              )
+            }
+
+        </Route> 
+
+        
+
+        
+         <Route path="*" 
+                element={<Error />} 
+             />       
       </Routes>
     </div>
   );

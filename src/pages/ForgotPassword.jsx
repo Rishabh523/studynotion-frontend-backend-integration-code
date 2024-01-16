@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getPasswordResetToken } from "../services/operations/authAPI";
-
+import { BiArrowBack } from "react-icons/bi"
 
 
 const ForgotPassword = () => {
@@ -67,7 +67,8 @@ const ForgotPassword = () => {
                     </form>
                     <div className="mt-6 flex items-center justify-between">
                         <Link to="/login">
-                            <p className="flex items-center gap-x-2 text-richblack-5">Back to login</p>
+                            <p className="flex items-center gap-x-2 text-richblack-5">
+                                <BiArrowBack />Back to login</p>
                         </Link>
                     </div>
                 </div>    

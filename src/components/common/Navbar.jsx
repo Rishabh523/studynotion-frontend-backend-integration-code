@@ -13,11 +13,11 @@ import {IoIosArrowDropdownCircle} from "react-icons/io"
 
 const subLinks = [
     {
-        title: "python",
+        title: "Python",
         link:"/catalog/python"
     },
     {
-        title: "web dev",
+        title: "Web Development",
         link:"/catalog/web-development"
     },
 ];
@@ -45,6 +45,7 @@ const Navbar = () => {
 
 
     useEffect( () => {
+        console.log("Printing Token", token);
         fetchSublinks();
     },[] )
 
@@ -75,7 +76,7 @@ const Navbar = () => {
                                 <IoIosArrowDropdownCircle/>
 
                                 <div className='invisible absolute left-[50%]
-                                    translate-x-[-50%] translate-y-[80%]
+                                    translate-x-[-50%] translate-y-[30%]
                                  top-[50%]
                                 flex flex-col rounded-md bg-richblack-5 p-4 text-richblack-900
                                 opacity-0 transition-all duration-200 group-hover:visible
