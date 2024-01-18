@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCourseCategories } from '../../../../../services/operations/courseDetailsAPI';
+import { addCourseDetails, editCourseDetails, fetchCourseCategories } from '../../../../../services/operations/courseDetailsAPI';
 import { HiOutlineCurrencyRupee } from "react-icons/hi";
 import { setStep, setCourse } from '../../../../../slices/courseSlice';
-import RequirementsField from './RequirementsField';
+import RequirementField from './RequirementField';
 import IconBtn from '../../../../common/IconBtn';
 import { toast } from 'react-hot-toast';
+import { COURSE_STATUS } from '../../../../../utils/constant';
+import ChipInput from './ChipInput';
+import Upload from '../Upload';
+
 
 const CourseInformationForm = () => {
   const {
@@ -53,12 +57,11 @@ const CourseInformationForm = () => {
       currentValues.courseShortDesc !== course.courseDescription ||
       currentValues.coursePrice !== course.price ||
       currentValues.courseTitle !== course.courseName ||
-    //  currentValues.courseTags.toString() !== course.tag.toString() ||
-      currentValues.courseBenefits !== course.courseName ||
-      currentValues.courseTitle !== course.courseName ||
-      currentValues.courseTitle !== course.courseName ||
-      currentValues.courseTitle !== course.courseName ||
-      currentValues.courseTitle !== course.courseName
+      currentValues.courseTags.toString() !== course.tag.toString() ||
+      currentValues.courseBenefits !== course.whatYouWillLearn ||
+      currentValues.courseCategory._id !== course.category._id ||
+      currentValues.courseImage !== course.thumbnail ||
+      currentValues.courseRequirements.toString() !== course.instructions.toString()
       )
       return true;
     else
@@ -68,44 +71,75 @@ const CourseInformationForm = () => {
   const onSubmit = async(data) => {
      
     if(editCourse) {
+      if(isFormUpdated()) {
       const currentValues = getValues();
       const formData = new FormData();
 
       formData.append("courseId", course._id);
       if(currentValues.courseTitle !== course.courseName){
-        formData.append("courseName", data.courseTitle)
+        formData.append("courseName", data.courseTitle);
       }
-      if(currentValues.courseTitle !== course.courseName){
-        formData.append("courseName", data.courseTitle)
+      if(currentValues.courseShortDesc !== course.courseDescription){
+        formData.append("courseDescription", data.courseShortDesc);
       }
-      if(currentValues.courseTitle !== course.courseName){
-        formData.append("courseName", data.courseTitle)
+      if(currentValues.coursePrice !== course.price){
+        formData.append("price", data.coursePrice);
       }
-      if(currentValues.courseTitle !== course.courseName){
-        formData.append("courseName", data.courseTitle)
+      if (currentValues.courseTags.toString() !== course.tag.toString()) {
+        formData.append("tag", JSON.stringify(data.courseTags))
       }
-      if(currentValues.courseTitle !== course.courseName){
-        formData.append("courseName", data.courseTitle)
+      if(currentValues.courseBenefits !== course.whatYouWillLearn){
+        formData.append("whatYouWillLearn", data.courseTitle);
       }
-      if(currentValues.courseTitle !== course.courseName){
-        formData.append("courseName", data.courseTitle)
+      if(currentValues.courseCategory._id !== course.category._id){
+        formData.append("category", data.courseCategory);
       }
-      if(currentValues.courseTitle !== course.courseName){
-        formData.append("courseName", data.courseTitle)
+      if(currentValues.courseRequirements.toString() !== course.instructions.toString()){
+        formData.append("instructions", JSON.stringify(data.courseRequirements));
       }
-      if(currentValues.courseTitle !== course.courseName){
-        formData.append("courseName", data.courseTitle)
+      if (currentValues.courseImage !== course.thumbnail) {
+        formData.append("thumbnailImage", data.courseImage)
       }
-
-        
-
+      setLoading(true);
+      const result = await editCourseDetails(formData, token);
+      setLoading(false);
+      if(result) {
+        setStep(2);
+        dispatch(setCourse(result));
+      }      
     }
     else
     {
       toast.error("No Changes made to the form");
     }
+    console.log("Printing FormData", formData);
+    console.log("Printing result", result);
     return;
   }
+     //create a new course
+     const formData = new FormData();
+     formData.append("courseName", data.courseTitle);
+     formData.append("courseDescription", data.courseShortDesc);
+     formData.append("price", data.coursePrice);
+     formData.append("tag", JSON.stringify(data.courseTags));
+     formData.append("whatYouWillLearn", data.courseBenefits);
+     formData.append("category", data.courseCategory);
+     formData.append("instructions", JSON.stringify(data.courseRequirements));
+     formData.append("status", COURSE_STATUS.DRAFT);
+     formData.append("thumbnailImage", data.courseImage);
+
+     setLoading(true);
+     console.log("BEFORE add course API call");
+     console.log("PRINTING FORMDATA", formData);
+     const result = await addCourseDetails(formData,token);
+     if(result) {
+         dispatch(setStep(2));
+         dispatch(setCourse(result));
+     }
+     setLoading(false);
+     console.log("PRINTING FORMDATA", formData);
+     console.log("PRINTING result", result); 
+}
   
   return (
     <form
@@ -145,7 +179,7 @@ const CourseInformationForm = () => {
           }    
         </div>
 
-        <div className='realtive'>
+        <div className='relative'>
           <label htmlFor='coursePrice'>
             Course Price <sup>*</sup>
           </label>
@@ -170,7 +204,7 @@ const CourseInformationForm = () => {
             <select 
             id='courseCategory'
             defaultValue=""
-            {...register("CourseCategory", {required:true})}
+            {...register("courseCategory", {required:true})}
             >
               <option value="" disabled>Choose a Category</option>
 
@@ -188,7 +222,7 @@ const CourseInformationForm = () => {
             }
         </div>
         {/* Create a custom for handling tags input */}
-        {/* <ChipInput 
+        <ChipInput 
            label="Tags"
            name="courseTags"
            placeholder="Enter tags and press enter"
@@ -196,14 +230,16 @@ const CourseInformationForm = () => {
            errors={errors}
            setValue={setValue}
            getValues={getValues}
-           /> */}
+           />
            {/* create a componenet for uploading and showing preview of media */}
-           {/* <Upload 
-                name
-                label
-                register
-                errors
-                setValue={}/> */}
+           <Upload
+        name="courseImage"
+        label="Course Thumbnail"
+        register={register}
+        setValue={setValue}
+        errors={errors}
+        editData={editCourse ? course?.thumbnail : null}
+      />
 
                 {/* Benefits of the course */}
           <div>
@@ -223,7 +259,7 @@ const CourseInformationForm = () => {
               }
           </div>
 
-          <RequirementsField 
+          <RequirementField 
              name="courseRequirements"
              label="Requiremnets/Instructions"
              register={register}
@@ -239,7 +275,7 @@ const CourseInformationForm = () => {
                  onClick={() => dispatch(setStep(2))}
                  className='flex items-center gap-x-2 bg-richblack-300'
                 >
-                  Continue without saving
+                  Continue Without Saving
                 </button>
               )
             }
