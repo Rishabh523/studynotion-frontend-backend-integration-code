@@ -144,27 +144,27 @@ const CourseInformationForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className='rounded-md border-richblack-700 bg-richblack-800 p-6 space-y-8'
+      className='space-y-8 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-6'
       >
-
-        <div>
-          <label htmlFor='courseTitle'>
-            Course Title <sup>*</sup>
+        {/* Course Title */}
+        <div className='flex flex-col space-y-2'>
+          <label className='text-sm text-richblack-5' htmlFor='courseTitle'>
+            Course Title <sup className='text-pink-200'>*</sup>
           </label>
           <input id='courseTitle'
-          placeholder='Enter Course'
+          placeholder='Enter Course Title'
           {...register("courseTitle", {required:true})}
-          className='w-full'
+          className='form-style w-full'
           />
           {
             errors.courseTitle && (
-              <span>Course Title is Required</span>
+              <span className='ml-2 text-xs tracking-wide text-pink-200'>Course Title is Required</span>
             )
           }     
         </div>
-
-        <div>
-          <label htmlFor='courseShortDesc'>Course Short Description<sup>*</sup>
+        {/* Course Short Description */}
+        <div className='flex flex-col space-y-2'>
+          <label className='' htmlFor='courseShortDesc'>Course Short Description<sup>*</sup>
           </label>
           <textarea 
               id='courseShortDesc'
