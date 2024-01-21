@@ -26,29 +26,32 @@ function loadScript(src) {
 
 export async function buyCourse(token, courses, userDetails, navigate, dispatch) {
     const toastId = toast.loading("Loading...");
-    try{
+    try{   console.log("Hi");
         //load the script
         const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
-
+           console.log("Hello");
         if(!res) {
             toast.error("RazorPay SDK failed to load");
             return;
         }
 
         //initiate the order
+        console.log("m");
         const orderResponse = await apiConnector("POST", COURSE_PAYMENT_API, 
                                 {courses},
                                 {
                                     Authorization: `Bearer ${token}`,
                                 })
-
-        if(!orderResponse.data.success) {
+                                console.log("n");
+                                console.log("PRINTING orderResponse", orderResponse);
+                                console.log("PRINTING orderResponse", orderResponse);
+           if(!orderResponse.data.success) {
             throw new Error(orderResponse.data.message);
         }
-        console.log("PRINTING orderResponse", orderResponse);
+        
         //options
         const options = {
-            key: process.env.RAZORPAY_KEY,
+            key: "rzp_test_XeWsMHavMGp8nS",
             currency: orderResponse.data.message.currency,
             amount: `${orderResponse.data.message.amount}`,
             order_id:orderResponse.data.message.id,
@@ -71,12 +74,13 @@ export async function buyCourse(token, courses, userDetails, navigate, dispatch)
         paymentObject.open();
         paymentObject.on("payment.failed", function(response) {
             toast.error("oops, payment failed");
+            console.log("Payment error");
             console.log(response.error);
         })
-
+        
     }
     catch(error) {
-        console.log("PAYMENT API ERROR.....", error);
+        console.log("PAYMENT API ERROR.....", "Hi hello how are you");
         toast.error("Could not make Payment");
     }
     toast.dismiss(toastId);
@@ -107,6 +111,7 @@ async function verifyPayment(bodyData, token, navigate, dispatch) {
         })
 
         if(!response.data.success) {
+            console.log("toastId Error");
             throw new Error(response.data.message);
         }
         toast.success("payment Successful, ypou are addded to the course");
@@ -114,7 +119,7 @@ async function verifyPayment(bodyData, token, navigate, dispatch) {
         dispatch(resetCart());
     }   
     catch(error) {
-        console.log("PAYMENT VERIFY ERROR....", error);
+        console.log("PAYMENT VERIFY ERROR....", "hi, my name ");
         toast.error("Could not verify Payment");
     }
     toast.dismiss(toastId);
