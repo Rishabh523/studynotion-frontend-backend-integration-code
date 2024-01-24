@@ -27,7 +27,6 @@ export default function ProfileDropDown() {
                     className="aspect-square w-[30px] rounded-full object-cover"
                 />
                 <AiOutlineCaretDown className="text-sm text-richblack-100" />
-
             </div>
             {open && (
                 <div

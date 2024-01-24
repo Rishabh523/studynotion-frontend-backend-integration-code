@@ -26,7 +26,7 @@ function Navbar() {
       setLoading(true)
       try {
         const res = await apiConnector("GET", categories.CATEGORIES_API)
-        console.log(res);
+      //  console.log(res);
         setSubLinks(res.data.data);
         
       } catch (error) {
@@ -36,7 +36,7 @@ function Navbar() {
     })()
   }, [])
 
-   console.log("sublinks", subLinks);
+   //console.log("sublinks", subLinks);
 
   const matchRoute = (route) => {
     return matchPath({ path: route }, location.pathname)
@@ -75,7 +75,8 @@ function Navbar() {
                           <p className="text-center">Loading...</p>
                         ) : subLinks.length ? (
                           <>
-                            {subLinks?.filter(
+                            {subLinks
+                              ?.filter(
                                 (subLink) => subLink?.courses?.length > 0
                               )?.map((subLink, i) => (
                                 <Link

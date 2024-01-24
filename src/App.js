@@ -27,6 +27,8 @@ import EditCourse from "./components/core/Dashboard/EditCourse";
 import Catalog from "./pages/Catalog";
 import CourseDetails from "./pages/CourseDetails";
 import ViewCourse from "./pages/ViewCourse";
+import VideoDetails from "./components/core/ViewCourse/VideoDetails";
+import Instructor from "./components/core/Dashboard/InstructorDashboard/Instructor";
 
 function App() {
   const dispatch = useDispatch();
@@ -88,9 +90,9 @@ function App() {
         <Route 
             path="/about"
               element = {
-              <OpenRoute>
+              
                 <About />
-              </OpenRoute>
+              
             }
             />  
         <Route 
@@ -130,6 +132,10 @@ function App() {
              {
               user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
                  <>
+                 <Route 
+            path="/dashboard/instructor" 
+            element={<Instructor />} 
+            />
                    <Route 
             path="/dashboard/add-course" 
             element={<AddCourse />} 
@@ -156,7 +162,7 @@ function App() {
             user?.accountType === ACCOUNT_TYPE.STUDENT && (
               <>
               <Route
-              path="view-course/:courseId/:courseId/section/:sectionId/sub-section/:subSectionId"
+              path="view-course/:courseId/section/:sectionId/sub-section/:subSectionId"
               element={<VideoDetails />}
               />
               </>

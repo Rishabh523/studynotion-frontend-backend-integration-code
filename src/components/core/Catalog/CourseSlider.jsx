@@ -14,9 +14,16 @@ const CourseSlider = ({Courses}) => {
     <>
       {Courses?.length ? (
         <Swiper 
-        navigation={true} 
-        modules={[Navigation]} 
-        className="mySwiper"
+        slidesPerView={4}
+        spaceBetween={24}
+        loop={true}
+        freeMode={true}
+        autoplay={{
+            delay:2500,
+            disableOnInteraction: false,
+        }}
+        modules={[FreeMode, Pagination, Autoplay]}
+        className="max-h-[30rem]"
         >
           {Courses?.map((course, i) => (
             <SwiperSlide key={i}>
