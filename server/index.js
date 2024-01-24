@@ -6,10 +6,10 @@ const profileRoutes = require("./routes/Profile");
 const paymentRoutes = require("./routes/Payments");
 const courseRoutes = require("./routes/Course");
 const contactUsRoute = require("./routes/Contact");
-const database = require("./confIg/database");
+const database = require("./Configtd/database");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-const {cloudinaryConnect} = require("./confIg/cloudinary");
+const {cloudinaryConnect} = require("./Configtd/cloudinary");
 const fileUpload = require("express-fileupload");
 const dotenv = require("dotenv");
 
