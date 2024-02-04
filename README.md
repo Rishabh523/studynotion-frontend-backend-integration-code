@@ -2,7 +2,7 @@
 
 StudyNotion is a comprehensive educational platform aimed at providing a seamless experience for students and educators alike. It offers a range of features that facilitate learning, collaboration, and resource sharing.
 
-<-- ![StudyNotion Logo](https://res.cloudinary.com/dvpulu3cc/image/upload/v1702489710/Screenshot_2023-12-13_231558_dwyhv3.png) -->
+<!-- ![StudyNotion Logo](https://res.cloudinary.com/dvpulu3cc/image/upload/v1702489710/Screenshot_2023-12-13_231558_dwyhv3.png) -->
 
 
 ## DESCRIPTION
@@ -44,7 +44,7 @@ StudyNotion is built using the following technologies:
 - *CLOUDINARY :*
   Cloudinary is a cloud-based media management solution that specializes in the storage, optimization, and delivery of images and videos. In StudyNotion, Cloudinary plays a crucial role in managing all media-related content, including images, videos, and documents. It provides functionalities for uploading, storage, and manipulation of media files, ensuring a reliable and scalable media management system.
 
-<-- ## ARCHITECTURE DIAGRAM
+<!-- ## ARCHITECTURE DIAGRAM
 
 ![Architecture Diagram](https://res.cloudinary.com/dvpulu3cc/image/upload/v1699036870/Screenshot_2023-11-04_000952_argzj8.jpg) -->
 
@@ -129,7 +129,7 @@ StudyNotion is built using the following technologies:
 | CHANGE_PASSWORD            | `api/v1/auth/changepassword`          |
 | DELETE_PROFILE             | `api/v1/profile/deleteProfile`       |
 
-<-- ### SCHEMA DESIGN
+<!-- ### SCHEMA DESIGN
 ![Schema Design](https://res.cloudinary.com/dvpulu3cc/image/upload/v1699036870/Screenshot_2023-11-04_001024_ef0phq.jpg) -->
 
 ### FUNCTIONALITIES
@@ -179,7 +179,7 @@ The front end of StudyNotion is designed using Figma, a popular design tool that
 
 We welcome contributions to enhance StudyNotion. Please fork the repository, make your changes, and submit a pull request for review.
 
-<-- ## LICENSE
+<!-- ## LICENSE
 
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT). -->
 
